@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { margin:0; font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f7ff; color:#222; }
+    header { background:#1976d2; color:white; padding:14px 10px; text-align:center; }
+    main { padding:16px; display:flex; flex-wrap:wrap; justify-content:center; gap:18px; }
+    .card { width:260px; background:white; border-radius:14px; box-shadow:0 10px 18px rgba(0,0,0,0.12); overflow:hidden; }
+    .card img { width:100%; height:140px; object-fit:cover; display:block; }
+    .inner { padding:12px; text-align:center; }
+    .room-title { font-size:18px; margin:6px 0 8px 0; color:#0d47a1; }
+    .icons { font-size:28px; margin-bottom:8px; }
+    .controls { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+    .btn { border:none; padding:8px 12px; border-radius:10px; font-weight:600; cursor:pointer; min-width:80px; }
+    .on { background:#43a047; color:white; }
+    .off { background:#e53935; color:white; }
+    .status-dot { display:inline-block; width:12px; height:12px; border-radius:50%; margin-left:8px; vertical-align:middle; box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+    .on-dot { background: #00c853; }
+    .off-dot { background: #f44336; }
+  </style>
+</head>
+<body>
+  <header><h2>🏠 Smart Home Dashboard</h2></header>
+  <main>
+
+    <!-- Bedroom 1 -->
+    <div class="card">
+      <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/bedroom-1866352_1280.jpg" alt="Bedroom1">
+      <div class="inner">
+        <div class="room-title">Bedroom 1 <span id="b1lamp-dot" class="status-dot off-dot"></span></div>
+        <div class="icons">💡 🌬️ ❄️</div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('b1_lamp',1)">Lamp ON</button>
+          <button class="btn off" onclick="toggle('b1_lamp',0)">Lamp OFF</button>
+        </div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('b1_ac',1)">AC ON</button>
+          <button class="btn off" onclick="toggle('b1_ac',0)">AC OFF</button>
+        </div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('b1_fan',1)">Fan ON</button>
+          <button class="btn off" onclick="toggle('b1_fan',0)">Fan OFF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bedroom 2 -->
+    <div class="card">
+      <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/bedroom-1866351_1280.jpg" alt="Bedroom2">
+      <div class="inner">
+        <div class="room-title">Bedroom 2 <span id="b2lamp-dot" class="status-dot off-dot"></span></div>
+        <div class="icons">💡 🌬️ ❄️</div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('b2_lamp',1)">Lamp ON</button>
+          <button class="btn off" onclick="toggle('b2_lamp',0)">Lamp OFF</button>
+        </div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('b2_ac',1)">AC ON</button>
+          <button class="btn off" onclick="toggle('b2_ac',0)">AC OFF</button>
+        </div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('b2_fan',1)">Fan ON</button>
+          <button class="btn off" onclick="toggle('b2_fan',0)">Fan OFF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Living Room -->
+    <div class="card">
+      <img src="https://cdn.pixabay.com/photo/2016/11/19/14/00/living-room-1835920_1280.jpg" alt="Living">
+      <div class="inner">
+        <div class="room-title">Living Room <span id="livlamp-dot" class="status-dot off-dot"></span></div>
+        <div class="icons">💡 🪟 📺</div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('liv_lamp',1)">Lamp ON</button>
+          <button class="btn off" onclick="toggle('liv_lamp',0)">Lamp OFF</button>
+        </div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('liv_fan',1)">Fan ON</button>
+          <button class="btn off" onclick="toggle('liv_fan',0)">Fan OFF</button>
+        </div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('liv_tv',1)">TV ON</button>
+          <button class="btn off" onclick="toggle('liv_tv',0)">TV OFF</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kitchen -->
+    <div class="card">
+      <img src="https://cdn.pixabay.com/photo/2016/03/09/09/22/kitchen-1244950_1280.jpg" alt="Kitchen">
+      <div class="inner">
+        <div class="room-title">Kitchen <span id="kitlamp-dot" class="status-dot off-dot"></span></div>
+        <div class="icons">💡 🔄 🔥</div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('kit_lamp',1)">Lamp ON</button>
+          <button class="btn off" onclick="toggle('kit_lamp',0)">Lamp OFF</button>
+        </div>
+        <div class="controls">
+          <button class="btn on" onclick="toggle('kit_exh',1)">Exhaust ON</button>
+          <button class="btn off" onclick="toggle('kit_exh',0)">Exhaust OFF</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // For now, simulate glowing dots
+    const status = {};
+    function toggle(dev, state){
+      status[dev] = state;
+      updateDots();
+    }
+
+    function updateDots(){
+      document.getElementById('b1lamp-dot').className = "status-dot " + (status['b1_lamp'] ? 'on-dot':'off-dot');
+      document.getElementById('b2lamp-dot').className = "status-dot " + (status['b2_lamp'] ? 'on-dot':'off-dot');
+      document.getElementById('livlamp-dot').className = "status-dot " + (status['liv_lamp'] ? 'on-dot':'off-dot');
+      document.getElementById('kitlamp-dot').className = "status-dot " + (status['kit_lamp'] ? 'on-dot':'off-dot');
+    }
+  </script>
+</body>
+</html>
